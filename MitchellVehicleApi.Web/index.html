@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="bower_components/angular-material/angular-material.css" rel="stylesheet" />
+
+    <style>
+        .active {
+            background-color: lightgray;
+        }
+    </style>
+</head>
+<body ng-app="MitchellVehicleApp" ng-cloak>
+    <div ng-controller="VehicleController">
+        <div layout="column" ng-cloak class="md-inline-form">
+            <md-content layout-padding>
+                <div>
+                    <form name="userForm">
+                        <div layout-gt-sm="row">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Year</label>
+                                <input ng-model="vehicle.Year">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Make</label>
+                                <input ng-model="vehicle.Make">
+                            </md-input-container><md-input-container class="md-block" flex-gt-sm>
+                                <label>Model</label>
+                                <input ng-model="vehicle.Model">
+                            </md-input-container>
+                        </div>
+                        <div layout-gt-sm="row">
+                            <p ng-if="err" style="color: red;"> {{err}}</p>
+                        </div>
+                        <div layout-gt-sm="row" layout-align="center center">
+                            <md-button class="md-raised md-primary" ng-click="createVehicle(vehicle)">Save</md-button>
+                        </div>
+                    </form>
+                </div>
+            </md-content>
+        </div>
+
+        <div ng-cloak layout-gt-sm="row" layout="column">
+            <div flex-gt-sm="50" flex>
+                <md-toolbar layout="row" class="md-hue-3">
+                    <div class="md-toolbar-tools">
+                        <span>Vehicles</span>
+                    </div>
+                </md-toolbar>
+                <md-content>
+                    <md-list flex>
+                        <md-list-item class="md-3-line" ng-class="vehicle.Id == selectedVehicle.Id ? 'active' : false" ng-repeat="vehicle in vehicles" ng-click="displaySelectedVehicle(vehicle)">
+                            <div class="md-list-item-text" layout="column">
+                                <h3>{{ vehicle.Year }}</h3>
+                                <h4>{{ vehicle.Make }} {{ vehicle.Model }}</h4>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </div>
+            <div layout-gt-sm="row" class="selectedVehicle">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Year</label>
+                    <input ng-model="selectedVehicle.Year">
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Make</label>
+                    <input ng-model="selectedVehicle.Make">
+                </md-input-container><md-input-container class="md-block" flex-gt-sm>
+                    <label>Model</label>
+                    <input ng-model="selectedVehicle.Model">
+                </md-input-container>
+            </div>
+            <div layout-gt-sm="row" layout-align="center center">
+                <md-button class="md-raised md-primary" ng-click="updateVehicle(selectedVehicle)">Update</md-button>
+            </div>
+            <div layout-gt-sm="row" layout-align="center center">
+                <md-button class="md-raised md-warn" ng-click="deleteVehicle(selectedVehicle)">Delete</md-button>
+            </div>
+        </div>
+    </div>
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+
+    <script src="app.js"></script>
+    <script src="vehicle.ctrl.js"></script>
+    <script src="vehicle.service.js"></script>
+
+</body>
+</html>
